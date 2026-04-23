@@ -2,40 +2,39 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "./db/client";
 import { groceryItems } from "./db/schema";
 
+export const listGroceryItems = async () => {
+  const items = await db
+    .select()
+    .from(groceryItems)
+    .orderBy(desc(groceryItems.updatedAt));
+  return items;
+};
 
-export const getGroceryItems = async () => {
-
-    const items = await db.select().from(groceryItems).orderBy(desc(groceryItems.updatedAt ));
-    return items;
-
-} 
-
-
-export const createGroceryItem = async (input:{
-    title: string;
-    category: string;
-    quantity: number;
-    priority?: string;
+export const createGroceryItem = async (input: {
+  title: string;
+  category: string;
+  quantity: number;
+  priority?: string;
 }) => {
+  const rows = await db
+    .insert(groceryItems)
+    .values({
+      title: input.title,
+      category: input.category,
+      quantity: Math.max(1, input.quantity),
+      priority: input.priority || "default",
+      isPurchased: false,
+      updatedAt: Date.now(),
+      createdAt: Date.now(),
+    })
+    .returning();
 
-    const rows = await db.insert(groceryItems).values({
-        title: input.title,
-        category: input.category,
-        quantity: Math.max(1, input.quantity),
-        priority: input.priority || "default",
-        isPurchased: false,
-        updatedAt: Date.now(),
-        createdAt: Date.now(),
-    }).returning();
-
-    return rows[0]
-
-}
-
+  return rows[0];
+};
 
 export const setGroceryItemPurchased = async (
   id: number, // ✅ serial → number
-  isPurchased: boolean
+  isPurchased: boolean,
 ) => {
   const rows = await db
     .update(groceryItems)
@@ -50,11 +49,9 @@ export const setGroceryItemPurchased = async (
   return rows[0];
 };
 
-
-
 export const updateGroceryItemQuantity = async (
   id: number, // ✅ serial → number
-  quantity: number
+  quantity: number,
 ) => {
   const rows = await db
     .update(groceryItems)
@@ -68,11 +65,10 @@ export const updateGroceryItemQuantity = async (
   return rows[0] ?? null; // ✅ cleaner
 };
 
-const deleteGroceryItem = async (id: number) => {
-    await db.delete(groceryItems).where(eq(groceryItems.id, id));
-}
+export const deleteGroceryItem = async (id: number) => {
+  await db.delete(groceryItems).where(eq(groceryItems.id, id));
+};
 
-
-const clearPurchasedItems = async () => {
-    await db.delete(groceryItems).where(eq(groceryItems.isPurchased, true));
-}
+export const clearPurchasedItems = async () => {
+  await db.delete(groceryItems).where(eq(groceryItems.isPurchased, true));
+};
