@@ -1,12 +1,15 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from "react";
+import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const InsightsScreen = () => {
   return (
-    <View>
-      <Text>insights</Text>
-    </View>
-  )
-}
+    <SafeAreaView>
+      <View>
+        <Text>Welcome to insight page</Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-export default InsightsScreen
+export default InsightsScreen;

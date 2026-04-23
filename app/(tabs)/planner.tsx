@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 const PlannerScreen = () => {
   return (
     <View>
-      <Text>planner</Text>
+      <Text className="text-black">This is planner Screen</Text>
     </View>
   );
 };
