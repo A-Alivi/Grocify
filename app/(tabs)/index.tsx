@@ -1,7 +1,6 @@
 import { Show, useClerk, useUser } from "@clerk/expo";
 import { Link } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-
 export default function Page() {
   const { user } = useUser();
   const { signOut } = useClerk();

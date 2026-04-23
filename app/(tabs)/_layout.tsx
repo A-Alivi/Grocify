@@ -1,14 +1,23 @@
+import { useGroceryStore } from "@/store/grocery-store";
 import { useAuth } from "@clerk/expo";
 import { FontAwesome } from "@expo/vector-icons";
 import { Redirect, Tabs } from "expo-router";
+import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 
 export default function TabsLayout() {
   const { isSignedIn, isLoaded } = useAuth();
+  const { loadItems } = useGroceryStore();
+
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
   const tabTintColor = isDark ? "lightgreen" : "green";
 
+  useEffect(() => {
+    loadItems();
+  }, []);
+
+  console.log("items loaded");
   if (!isLoaded) {
     return null;
   }
