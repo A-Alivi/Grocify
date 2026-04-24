@@ -22,7 +22,7 @@ const CompletedItems = () => {
         >
           <View className="flex-row items-center gap-2">
             <Pressable
-              onPress={async () => await togglePurchased(item.id)}
+              onPress={() => togglePurchased(item.id)}
               className="h-6 w-6 items-center justify-center rounded-full bg-primary"
             >
               <FontAwesome6 name="check" size={12} color="#fFfff" />
@@ -32,8 +32,8 @@ const CompletedItems = () => {
             </Text>
           </View>
           <Pressable
-            onPress={async () => {
-              await removeItem(item.id);
+            onPress={() => {
+              removeItem(item.id);
             }}
             className="h-8 w-8 items-center justify-center rounded-xl bg-destructive"
           >
