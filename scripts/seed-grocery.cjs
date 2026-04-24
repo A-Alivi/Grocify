@@ -9,16 +9,76 @@ if (!databaseUrl) {
 const sql = neon(databaseUrl);
 
 const seedItems = [
-  { title: "Bananas", category: "Produce", quantity: 6, priority: "medium", isPurchased: false },
-  { title: "Avocado", category: "Produce", quantity: 3, priority: "high", isPurchased: false },
-  { title: "Greek Yogurt", category: "Dairy", quantity: 2, priority: "medium", isPurchased: true },
-  { title: "Cheddar Cheese", category: "Dairy", quantity: 1, priority: "low", isPurchased: false },
-  { title: "Sourdough Bread", category: "Bakery", quantity: 1, priority: "high", isPurchased: false },
-  { title: "Pasta", category: "Pantry", quantity: 2, priority: "low", isPurchased: false },
-  { title: "Tomato Sauce", category: "Pantry", quantity: 2, priority: "medium", isPurchased: true },
-  { title: "Granola Bars", category: "Snacks", quantity: 5, priority: "medium", isPurchased: false },
-  { title: "Dark Chocolate", category: "Snacks", quantity: 2, priority: "low", isPurchased: false },
-  { title: "Eggs", category: "Dairy", quantity: 12, priority: "high", isPurchased: false },
+  {
+    title: "Bananas",
+    category: "Produce",
+    quantity: 6,
+    priority: "medium",
+    isPurchased: false,
+  },
+  {
+    title: "Avocado",
+    category: "Produce",
+    quantity: 3,
+    priority: "high",
+    isPurchased: false,
+  },
+  {
+    title: "Greek Yogurt",
+    category: "Dairy",
+    quantity: 2,
+    priority: "medium",
+    isPurchased: true,
+  },
+  {
+    title: "Cheddar Cheese",
+    category: "Dairy",
+    quantity: 1,
+    priority: "low",
+    isPurchased: false,
+  },
+  {
+    title: "Sourdough Bread",
+    category: "Bakery",
+    quantity: 1,
+    priority: "high",
+    isPurchased: false,
+  },
+  {
+    title: "Pasta",
+    category: "Pantry",
+    quantity: 2,
+    priority: "low",
+    isPurchased: false,
+  },
+  {
+    title: "Tomato Sauce",
+    category: "Pantry",
+    quantity: 2,
+    priority: "medium",
+    isPurchased: true,
+  },
+  {
+    title: "Granola Bars",
+    category: "Snacks",
+    quantity: 5,
+    priority: "medium",
+    isPurchased: false,
+  },
+  {
+    title: "Dark Chocolate",
+    category: "Snacks",
+    quantity: 2,
+    priority: "low",
+    isPurchased: false,
+  },
+  {
+    title: "Eggs",
+    category: "Dairy",
+    quantity: 12,
+    priority: "high",
+    isPurchased: false,
+  },
 ];
 
 async function seed() {

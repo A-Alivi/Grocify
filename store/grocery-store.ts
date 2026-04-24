@@ -6,7 +6,9 @@ export type GroceryCategory =
   | "Bakery"
   | "Snacks"
   | "Pantry";
-export type GroceryPriority = "Low" | "Medium" | "High";
+
+export type GroceryPriority = "low" | "medium" | "high";
+
 export type GroceryItem = {
   id: number;
   title: string;
@@ -42,18 +44,21 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
   items: [],
   isLoading: false,
   error: null,
+
   loadItems: async () => {
+    set({ isLoading: true, error: null });
     try {
-      set({ isLoading: true, error: null });
-      const response = await fetch("/api/items");
-      const payload = await response.json();
-      if (!response.ok) {
-        throw new Error(payload.error || "Failed to load items");
-      }
-      set({ items: payload.items, isLoading: false });
+      const res = await fetch("/api/items");
+      const payload = await res.json();
+
+      if (!res.ok) throw new Error(`Request failed (${res.status})`);
+
+      set({
+        items: payload ?? [], // ✅ fallback to empty array
+      });
     } catch (error) {
       console.error("Error loading items:", error);
-      set({ error: "Failed to load items", isLoading: false });
+      set({ error: "Something went wrong", items: [] }); // ✅ safe fallback
     } finally {
       set({ isLoading: false });
     }
@@ -125,6 +130,9 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
       });
 
       const payload = (await res.json()) as ItemResponse;
+
+      console.log("Response Status", res.status);
+      console.log("Response Payload", payload);
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
 
       set((state) => ({
@@ -132,6 +140,8 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
           item.id === id ? payload.items : item,
         ),
       }));
+      debugger;
+      console.log("Check Debugger");
     } catch (error) {
       console.error("Error toggling purchased:", error);
       set({ error: "Something went wrong" });
