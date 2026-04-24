@@ -5,7 +5,7 @@ import { Text, View } from "react-native";
 const ListHeroCard = () => {
   const { items, loadItems } = useGroceryStore();
   useEffect(() => {
-    loadItems(); // ✅ load data on mount
+    loadItems();
   }, []);
   const completedCount = items.filter((item) => item.isPurchased).length;
   const pendingCount = items.length - completedCount;

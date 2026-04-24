@@ -1,5 +1,4 @@
 import { GroceryItem, useGroceryStore } from "@/store/grocery-store";
-import { FontAwesome6 } from "@expo/vector-icons";
 import { Pressable, Text, View } from "react-native";
 
 const priorityPillBg = {
@@ -30,7 +29,7 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
             <Text className="flex-1 text-lg font-semibold text-card-foreground">
               {item.title}
             </Text>
-            <View
+            {/* <View
               className={`rounded-full px-3 py-1 ${priorityPillBg[item.priority]}`}
             >
               <Text
@@ -38,7 +37,7 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
               >
                 {item.priority}
               </Text>
-            </View>
+            </View> */}
           </View>
 
           <View className="mt-2 flex-row items-center gap-2">
@@ -50,7 +49,7 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
           </View>
 
           <View className="mt-3 flex-row items-center gap-2">
-            <Pressable
+            {/* <Pressable
               className="h-8 w-8 items-center justify-center rounded-xl border border-border bg-muted"
               onPress={() =>
                 updateQuantity(item.id, Math.max(1, item.quantity - 1))
@@ -68,16 +67,16 @@ const PendingItemCard = ({ item }: { item: GroceryItem }) => {
               onPress={() => updateQuantity(item.id, item.quantity + 1)}
             >
               <FontAwesome6 name="plus" size={12} color="#3b5a4a" />
-            </Pressable>
+            </Pressable>*/}
           </View>
         </View>
 
-        <Pressable
+        {/* <Pressable
           className="h-9 w-9 items-center justify-center rounded-xl bg-destructive"
           onPress={() => removeItem(item.id)}
         >
           <FontAwesome6 name="trash" size={13} color="#d45f58" />
-        </Pressable>
+        </Pressable> */}
       </View>
     </View>
   );

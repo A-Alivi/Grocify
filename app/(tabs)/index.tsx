@@ -1,3 +1,4 @@
+import CompletedItems from "@/components/list/CompletedItems";
 import ListHeroCard from "@/components/list/ListHeroCard";
 import PendingItemCard from "@/components/list/PendingItemCard";
 import TabScreenBackground from "@/components/TabScreenBackground";
@@ -12,10 +13,10 @@ const ListScreen = () => {
   const { items, loadItems } = useGroceryStore();
 
   useEffect(() => {
+    items;
     loadItems();
   }, []);
-  const pendingItems = items.filter((item) => !item.isPurchased);
-
+  const pendingItems = items?.filter((item) => !item.isPurchased);
   return (
     <ScrollView
       className="flex-1 bg-background py-4"
@@ -35,6 +36,7 @@ const ListScreen = () => {
       {pendingItems.map((item) => (
         <PendingItemCard key={item.id} item={item} />
       ))}
+      <CompletedItems />
     </ScrollView>
   );
 };

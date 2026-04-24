@@ -26,7 +26,7 @@ export type CreateItemInput = {
 };
 
 type ItemsResponse = { items: GroceryItem[] };
-type ItemResponse = { items: GroceryItem };
+type ItemResponse = { item: GroceryItem };
 
 type GroceryStore = {
   items: GroceryItem[];
@@ -83,7 +83,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
           `Request failed: ${response.statusText || "Failed to add item"}`,
         );
       }
-      set((state) => ({ items: [payload.items, ...state.items] }));
+      set((state) => ({ items: [payload.item, ...state.items] }));
     } catch (error) {
       console.error("Error adding item:", error);
       set({ error: "Failed to add item" });
@@ -107,7 +107,7 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
       }
       set((state) => ({
         items: state.items.map((item) =>
-          item.id === id ? { ...item, quantity: payload.items.quantity } : item,
+          item.id === id ? { ...item, quantity: payload.item.quantity } : item,
         ),
       }));
     } catch (error) {
@@ -126,39 +126,35 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
       const res = await fetch(`/api/items/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isPurchased: nextPurchased }),
+        body: JSON.stringify({ purchased: nextPurchased }),
       });
 
       const payload = (await res.json()) as ItemResponse;
-
-      console.log("Response Status", res.status);
-      console.log("Response Payload", payload);
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
 
       set((state) => ({
         items: state.items.map((item) =>
-          item.id === id ? payload.items : item,
+          item.id === id ? payload.item : item,
         ),
       }));
-      debugger;
-      console.log("Check Debugger");
     } catch (error) {
       console.error("Error toggling purchased:", error);
       set({ error: "Something went wrong" });
     }
   },
+
   removeItem: async (id) => {
     set({ error: null });
     try {
       const res = await fetch(`/api/items/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(`Request failed (${res.status})`);
-
       set((state) => ({ items: state.items.filter((item) => item.id !== id) }));
     } catch (error) {
       console.error("Error removing item:", error);
       set({ error: "Something went wrong" });
     }
   },
+
   clearPurchased: async () => {
     set({ error: null });
     try {
