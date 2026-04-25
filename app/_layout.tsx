@@ -5,14 +5,17 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import * as Sentry from "@sentry/react-native";
 import { Stack } from "expo-router";
+import * as WebBrowser from "expo-web-browser";
 import { useColorScheme } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import "../global.css";
-import * as Sentry from '@sentry/react-native';
+
+WebBrowser.maybeCompleteAuthSession();
 
 Sentry.init({
-  dsn: 'https://e061fce0a7ae16f9cc734ef12c122606@o4511279848226816.ingest.de.sentry.io/4511279849865296',
+  dsn: "https://e061fce0a7ae16f9cc734ef12c122606@o4511279848226816.ingest.de.sentry.io/4511279849865296",
 
   // Adds more context data to events (IP address, cookies, user, etc.)
   // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/
