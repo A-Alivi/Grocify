@@ -7,11 +7,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignInScreen = () => {
   const { handleSocialAuth, loadingStrategy } = useSocialAuth();
-
   const isGoogleClicked = loadingStrategy === "oauth_google";
   const isAppleClicked = loadingStrategy === "oauth_apple";
   const isGitHubClicked = loadingStrategy === "oauth_github";
-
   const isLoading = isGoogleClicked || isAppleClicked || isGitHubClicked;
 
   return (
