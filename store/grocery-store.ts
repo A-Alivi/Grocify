@@ -107,7 +107,13 @@ export const useGroceryStore = create<GroceryStore>((set, get) => ({
       }
       set((state) => ({
         items: state.items.map((item) =>
-          item.id === id ? { ...item, quantity: payload.item.quantity } : item,
+          item.id === id
+            ? {
+                ...item,
+                quantity:
+                  payload?.item?.quantity ?? payload?.item ?? nextQuantity,
+              }
+            : item,
         ),
       }));
     } catch (error) {

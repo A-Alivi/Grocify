@@ -5,11 +5,10 @@ import { Pressable, Text, View } from "react-native";
 
 const CompletedItems = () => {
   const { removeItem, togglePurchased, items } = useGroceryStore();
-  const completedItems = items.filter((item) => {
-    item.isPurchased;
-  });
+  const completedItems = (items ?? []).filter(
+    (item) => item && item.isPurchased,
+  );
   if (!completedItems.length) return null;
-
   return (
     <View className="mt-3 rounded-3xl border-border bg-secondary p-4">
       <Text className="text-sm font-semibold uppercase tracking-[1px] text-secondary-foreground">

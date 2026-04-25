@@ -7,7 +7,9 @@ const ListHeroCard = () => {
   useEffect(() => {
     loadItems();
   }, []);
-  const completedCount = items.filter((item) => item.isPurchased).length;
+  const completedCount = (items ?? []).filter(
+    (item) => item && item.isPurchased,
+  ).length;
   const pendingCount = items.length - completedCount;
   const completionRate = items.length
     ? Math.round((completedCount / items.length) * 100)

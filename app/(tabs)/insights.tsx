@@ -1,14 +1,28 @@
+import ClearCompletedButton from "@/components/insights/ClearCompletedButton";
+import InsightsCategorySection from "@/components/insights/InsightsCategorySection";
+import InsightsPrioritySection from "@/components/insights/InsightsPrioritySection";
+import InsightsStateSection from "@/components/insights/InsightsStateSection";
+import UserProfile from "@/components/insights/UserProfile";
+import TabScreenBackground from "@/components/TabScreenBackground";
 import React from "react";
-import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ScrollView } from "react-native";
 
 const InsightsScreen = () => {
   return (
-    <SafeAreaView>
-      <View>
-        <Text>Welcome to insight page</Text>
-      </View>
-    </SafeAreaView>
+    <>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ padding: 20, gap: 14 }}
+        contentInsetAdjustmentBehavior="automatic"
+      >
+        <TabScreenBackground />
+        <UserProfile />
+        <InsightsStateSection />
+        <InsightsCategorySection />
+        <InsightsPrioritySection />
+        <ClearCompletedButton />
+      </ScrollView>
+    </>
   );
 };
 

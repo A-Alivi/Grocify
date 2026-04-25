@@ -3,20 +3,19 @@ import ListHeroCard from "@/components/list/ListHeroCard";
 import PendingItemCard from "@/components/list/PendingItemCard";
 import TabScreenBackground from "@/components/TabScreenBackground";
 import { useGroceryStore } from "@/store/grocery-store";
-import { useClerk, useUser } from "@clerk/expo";
 import React, { useEffect } from "react";
 import { FlatList, Text, View } from "react-native";
 
 const ListScreen = () => {
-  const { user } = useUser();
-  const { signOut } = useClerk();
   const { items, loadItems } = useGroceryStore();
 
   useEffect(() => {
     items;
     loadItems();
   }, []);
-  const pendingItems = items?.filter((item) => !item.isPurchased);
+  const pendingItems = (items ?? []).filter(
+    (item) => item && !item.isPurchased,
+  );
   return (
     <FlatList
       className="flex-1 bg-background"
@@ -39,8 +38,11 @@ const ListScreen = () => {
           </View>
         </View>
       }
-      ListEmptyComponent={<Text>NO ITEMS IN DB.</Text>}
-      ListFooterComponent={<CompletedItems />}
+      ListFooterComponent={
+        <>
+          <CompletedItems />
+        </>
+      }
     />
   );
 };
