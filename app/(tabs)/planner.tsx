@@ -4,7 +4,8 @@ import TabScreenBackground from "@/components/TabScreenBackground";
 import { useGroceryStore } from "@/store/grocery-store";
 import { FontAwesome6 } from "@expo/vector-icons";
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 const PlannerScreen = () => {
   const { items } = useGroceryStore();
@@ -17,11 +18,13 @@ const PlannerScreen = () => {
     .reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <ScrollView
+    <KeyboardAwareScrollView
+      bottomOffset={80}
       className="flex-1 bg-background py-4"
       contentInsetAdjustmentBehavior="automatic"
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ padding: 20, gap: 14 }}
+      keyboardShouldPersistTaps="handled"
     >
       <TabScreenBackground />
       <View className="gap-4 rounded-3xl border border-border bg-card/70 p-5">
@@ -86,7 +89,7 @@ const PlannerScreen = () => {
         </Text>
       </View>
       <PlannerFormCard />
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
